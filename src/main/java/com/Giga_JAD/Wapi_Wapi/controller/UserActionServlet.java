@@ -1,4 +1,4 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

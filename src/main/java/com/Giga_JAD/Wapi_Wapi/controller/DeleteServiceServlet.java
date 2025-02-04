@@ -1,10 +1,10 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import java.io.IOException;
 import java.sql.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
-import utils.sessionUtils;
+import com.Giga_JAD.Wapi_Wapi.utils.sessionUtils;
 
 public class DeleteServiceServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;

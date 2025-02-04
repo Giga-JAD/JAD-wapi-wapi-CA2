@@ -1,4 +1,4 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-import MODEL.CLASS.User;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.User;
 
 public class BlockUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

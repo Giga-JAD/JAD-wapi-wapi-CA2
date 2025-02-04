@@ -1,16 +1,16 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 import java.util.List;
 
-import MODEL.CLASS.Category;
-import MODEL.CLASS.Service;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Category;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Service;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import utils.sessionUtils;
+import com.Giga_JAD.Wapi_Wapi.utils.sessionUtils;
 
 public class CreateCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

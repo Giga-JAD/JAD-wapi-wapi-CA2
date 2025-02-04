@@ -1,4 +1,4 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -6,8 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import utils.passwordUtils;
-import utils.sessionUtils;
+import com.Giga_JAD.Wapi_Wapi.utils.passwordUtils;
+import com.Giga_JAD.Wapi_Wapi.utils.sessionUtils;
 
 import java.io.IOException;
 import java.sql.Connection;

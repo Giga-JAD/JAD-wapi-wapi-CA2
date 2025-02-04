@@ -1,18 +1,18 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import utils.sessionUtils;
+import com.Giga_JAD.Wapi_Wapi.utils.sessionUtils;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-import MODEL.CLASS.Category;
-import MODEL.CLASS.Service;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Category;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Service;
 
 public class ServiceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

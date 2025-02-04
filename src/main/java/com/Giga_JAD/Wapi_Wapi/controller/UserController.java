@@ -1,13 +1,13 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
-import MODEL.CLASS.User;
-import MODEL.DAO.UserDAO;
-import utils.sessionUtils;
-import utils.passwordUtils;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.User;
+import com.Giga_JAD.Wapi_Wapi.model.dao.UserDAO;
+import com.Giga_JAD.Wapi_Wapi.utils.sessionUtils;
+import com.Giga_JAD.Wapi_Wapi.utils.passwordUtils;
 import java.util.*;
 
 @WebServlet("/user/*")

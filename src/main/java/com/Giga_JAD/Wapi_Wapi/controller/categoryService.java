@@ -1,4 +1,4 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -16,8 +16,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import MODEL.CLASS.Category;
-import MODEL.CLASS.Service;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Category;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Service;
 
 public class categoryService extends HttpServlet {
     private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import java.io.IOException;
 import java.sql.*;

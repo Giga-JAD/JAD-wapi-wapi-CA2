@@ -1,4 +1,4 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import MODEL.CLASS.Category;
-import MODEL.CLASS.Service;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Category;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Service;
 
 /**
  * Servlet implementation class logout

@@ -1,4 +1,4 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
 
-import MODEL.CLASS.CartItem;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.CartItem;
 
 import java.util.ArrayList;
 

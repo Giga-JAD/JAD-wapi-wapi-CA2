@@ -1,9 +1,9 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import java.util.Map;
 
-import MODEL.CLASS.Booking;
-import MODEL.CLASS.TimeSlot;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Booking;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.TimeSlot;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 
-import utils.sessionUtils;
+import com.Giga_JAD.Wapi_Wapi.utils.sessionUtils;
 
 public class bookingPageLogic extends HttpServlet {
 	private static final long serialVersionUID = 1L;

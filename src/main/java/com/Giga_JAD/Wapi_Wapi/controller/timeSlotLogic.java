@@ -1,11 +1,11 @@
-package CONTROLLER;
+package com.Giga_JAD.Wapi_Wapi.controller;
 
 import java.util.Map;
 
-import MODEL.CLASS.CartItem;
-import MODEL.CLASS.Category;
-import MODEL.CLASS.Service;
-import MODEL.CLASS.TimeSlot;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.CartItem;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Category;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.Service;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.TimeSlot;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.LinkedHashMap;
 
-import utils.sessionUtils;
+import com.Giga_JAD.Wapi_Wapi.utils.sessionUtils;
 
 public class timeSlotLogic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
