@@ -3,17 +3,19 @@ package com.Giga_JAD.Wapi_Wapi.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import io.github.cdimascio.dotenv.Dotenv;
 
 //reference: https://www.linkedin.com/learning/java-ee-concurrency-and-multithrea
 
 public class DBConnection {
+	private static final Dotenv dotenv = Dotenv.load();
 
 	public static Connection getConnection() {
 
-		String dbUrl = System.getenv("DB_URL");
-		String dbUser = System.getenv("DB_USER");
-		String dbPassword = System.getenv("DB_PASSWORD");
-		String dbClass = System.getenv("DB_CLASS");
+		String dbUrl = dotenv.get("DB_URL");
+        String dbUser = dotenv.get("DB_USER");
+        String dbPassword = dotenv.get("DB_PASSWORD");
+        String dbClass = dotenv.get("DB_CLASS");
 
 		Connection connection = null;
 		try {
