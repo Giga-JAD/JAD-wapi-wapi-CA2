@@ -1,7 +1,7 @@
-package MODEL.DAO;
+package com.Giga_JAD.Wapi_Wapi.model.dao;
 
-import MODEL.CLASS.*;
-import DBACCESS.DBConnection;
+import com.Giga_JAD.Wapi_Wapi.model.blueprint.*;
+import com.Giga_JAD.Wapi_Wapi.model.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

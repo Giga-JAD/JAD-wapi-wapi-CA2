@@ -1,4 +1,4 @@
-package utils;
+package com.Giga_JAD.Wapi_Wapi.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

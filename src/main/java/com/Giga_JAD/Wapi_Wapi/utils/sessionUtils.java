@@ -1,4 +1,4 @@
-package utils;
+package com.Giga_JAD.Wapi_Wapi.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

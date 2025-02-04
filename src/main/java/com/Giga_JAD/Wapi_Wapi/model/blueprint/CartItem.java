@@ -1,4 +1,4 @@
-package MODEL.CLASS;
+package com.Giga_JAD.Wapi_Wapi.model.blueprint;
 
 public class CartItem {
 	private String booked_date;

@@ -1,4 +1,4 @@
-package DBACCESS;
+package com.Giga_JAD.Wapi_Wapi.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
