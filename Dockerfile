@@ -9,12 +9,15 @@ FROM tomcat:10-jdk17
 WORKDIR /usr/local/tomcat/webapps/
 COPY --from=build /app/target/app.war ROOT.war
 
-# Set environment variables
+# Set environment variables correctly
 ENV PORT=8081
-ENV CATALINA_OPTS="-Dserver.port=${PORT}"
+ENV CATALINA_OPTS="-Dserver.port=${PORT} -DPORT=${PORT}"
 
-# Expose Render’s assigned port
+# Force Tomcat to use PORT from environment
+RUN sed -i 's/Connector port="8080"/Connector port="'$PORT'"/g' /usr/local/tomcat/conf/server.xml
+
+# Expose the correct port
 EXPOSE 8081
 
-# Start Tomcat ensuring the correct PORT is used
+# Start Tomcat
 CMD ["sh", "-c", "catalina.sh run"]
