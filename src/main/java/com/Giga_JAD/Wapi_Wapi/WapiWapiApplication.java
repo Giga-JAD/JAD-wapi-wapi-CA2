@@ -10,7 +10,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class WapiWapiApplication {
 
 	public static void main(String[] args) {
-		Dotenv dotenv = Dotenv.load();
+		Dotenv dotenv = EnvConfig.getDotenv();
 
 		System.setProperty("stripe.secretKey", dotenv.get("stripe_secretKey"));
 		System.setProperty("stripe.webhookSecret", dotenv.get("stripe_webhookSecret"));
@@ -18,6 +18,7 @@ public class WapiWapiApplication {
 		System.setProperty("DB_URL", dotenv.get("DB_URL"));
 		System.setProperty("DB_USERNAME", dotenv.get("DB_USER"));
 		System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+		System.setProperty("PORT", dotenv.get("PORT"));
 		SpringApplication.run(WapiWapiApplication.class, args);
 	}
 

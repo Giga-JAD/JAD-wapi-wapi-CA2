@@ -1,12 +1,14 @@
 package com.Giga_JAD.Wapi_Wapi.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 public class ProductRequest {
 	private long amount;
@@ -36,5 +38,13 @@ public class ProductRequest {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
+	}
+
+	public int getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
 	}
 }
