@@ -41,10 +41,11 @@ public class PaymentController {
 	/** ✅ Create Payment (Checkout Session) */
 	@PostMapping("/checkout")
 	public StripeResponse createCheckoutSession(@RequestHeader("X-Username") String username,
-			@RequestHeader("X-Secret") String secret, @RequestBody List<ProductRequest> products) {
+			@RequestHeader("X-Secret") String secret, @RequestHeader("X-third-party") boolean thirdParty,
+			@RequestBody List<ProductRequest> products) {
 
 		// ✅ Validate business credentials
-		if (!stripeService.validateBusiness(username, secret)) {
+		if (!stripeService.validateBusiness(username, secret, thirdParty)) {
 			throw new IllegalArgumentException("Invalid business credentials!");
 		}
 
@@ -54,11 +55,12 @@ public class PaymentController {
 	/** ✅ Fetch Payment Details */
 	@GetMapping("/{bookingId}")
 	public ResponseEntity<Map<String, Object>> getPaymentDetails(@RequestHeader("X-Username") String Key,
-			@RequestHeader("X-Secret") String Secret, @PathVariable String bookingId) {
+			@RequestHeader("X-Secret") String Secret, @RequestHeader("X-third-party") boolean thirdParty,
+			@PathVariable String bookingId) {
 
 		// ✅ Validate Credentials
 		try {
-			if (!stripeService.validateBusiness(Key, Secret)) {
+			if (!stripeService.validateBusiness(Key, Secret, thirdParty)) {
 				return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
 			}
 		} catch (Exception e) {

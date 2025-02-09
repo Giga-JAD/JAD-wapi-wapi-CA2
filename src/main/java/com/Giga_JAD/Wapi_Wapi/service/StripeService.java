@@ -37,8 +37,8 @@ public class StripeService {
 	}
 
 	/** ✅ Validate business credentials using Key (username) & Secret (password) */
-	public boolean validateBusiness(String key, String secret) {
-		return userDAO.validateBusiness(key, secret);
+	public boolean validateBusiness(String key, String secret, boolean thirdParty) {
+		return userDAO.validateBusiness(key, secret, thirdParty);
 	}
 
 	/** ✅ Create a Stripe Checkout Session and Save Payment */
