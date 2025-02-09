@@ -11,10 +11,11 @@ COPY --from=build /app/target/app.war ROOT.war
 
 # Set environment variables correctly
 ENV CATALINA_OPTS="-Dspring.main.allow-circular-references=true -Dspring.devtools.restart.enabled=false -Dspring.aop.proxy-target-class=false"
+ENV PORT=8081
+ENV CATALINA_OPTS="$CATALINA_OPTS -Dserver.port=$PORT"
 
 # Ensure Render picks the correct port
-ENV PORT=8081
 EXPOSE 8081
 
-# Start Tomcat with environment variables
-CMD ["sh", "-c", "catalina.sh run"]
+# Start Tomcat with correct CATALINA_OPTS
+CMD catalina.sh run
