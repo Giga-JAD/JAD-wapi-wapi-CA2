@@ -1,4 +1,4 @@
-package com.Giga_JAD.Wapi_Wapi.service.dto;
+package com.Giga_JAD.Wapi_Wapi.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class ProductRequest {
 	private long amount;
 	private long quantity;
-	private String name;
+	private int bookingId;
 	private String currency;
 
 	public long getAmount() {
@@ -28,14 +28,6 @@ public class ProductRequest {
 
 	public void setQuantity(long quantity) {
 		this.quantity = quantity;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getCurrency() {
