@@ -9,13 +9,12 @@ FROM tomcat:10-jdk17
 WORKDIR /usr/local/tomcat/webapps/
 COPY --from=build /app/target/app.war ROOT.war
 
-# Set environment variables correctly
-ENV CATALINA_OPTS="-Dspring.main.allow-circular-references=true -Dspring.devtools.restart.enabled=false -Dspring.aop.proxy-target-class=false"
+# Set environment variables
 ENV PORT=8081
-ENV CATALINA_OPTS="$CATALINA_OPTS -Dserver.port=$PORT"
+ENV CATALINA_OPTS="-Dserver.port=${PORT}"
 
-# Ensure Render picks the correct port
+# Expose Render’s assigned port
 EXPOSE 8081
 
-# Start Tomcat with correct CATALINA_OPTS
-CMD catalina.sh run
+# Start Tomcat ensuring the correct PORT is used
+CMD ["sh", "-c", "catalina.sh run"]
