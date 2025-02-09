@@ -60,7 +60,7 @@ public class StripeService {
 
 			SessionCreateParams.LineItem.PriceData priceData = SessionCreateParams.LineItem.PriceData.builder()
 					.setCurrency(product.getCurrency() == null ? "SGD" : product.getCurrency())
-					.setUnitAmount(product.getAmount()).setProductData(productData).build();
+					.setUnitAmount(product.getAmount() * 100).setProductData(productData).build();
 
 			SessionCreateParams.LineItem lineItem = SessionCreateParams.LineItem.builder()
 					.setQuantity((long) product.getQuantity()) // ✅ Convert long to int
