@@ -36,8 +36,9 @@ public class UserDAO {
 					} else {
 						return false;
 					}
-				}
-				throw new IllegalArgumentException("Invalid Credentials"); // No valid user found
+				} else {
+					throw new IllegalArgumentException("Invalid Credentials");
+				} // No valid user found
 			}, key, hashedSecret);
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Invalid Credentials causing unexpected error!");
