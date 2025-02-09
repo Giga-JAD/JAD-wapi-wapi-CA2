@@ -15,6 +15,5 @@ ENV PORT=8081
 EXPOSE 8081
 
 # Run the Spring Boot JAR directly
-CMD ["sh", "-c", "echo `Starting application on port, ${address}:${PORT}`; java -jar app.jar --server.address=0.0.0.0 --server.port=${PORT}"]
-
+CMD ["sh", "-c", "echo 'Starting app on ${PORT}'; java -jar app.jar --server.address=0.0.0.0 --server.port=${PORT}"]
 
