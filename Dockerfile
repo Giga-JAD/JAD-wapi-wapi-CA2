@@ -4,10 +4,14 @@ WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Use Tomcat as the application server for the WAR file
+# Use Tomcat for the final run
 FROM tomcat:10-jdk17
 WORKDIR /usr/local/tomcat/webapps/
 COPY --from=build /app/target/app.war ROOT.war
+
+# Expose Render’s assigned port dynamically
+ENV PORT 8081
+EXPOSE 8081
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]
