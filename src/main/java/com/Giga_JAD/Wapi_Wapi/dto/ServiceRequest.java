@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder // Works properly now
+@Builder
+
 public class ServiceRequest {
 	private int serviceId;
-	private int categoryId;
+	private String categoryName;
 	private String serviceName;
 	private double price;
 	private int durationInHour;
