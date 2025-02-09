@@ -10,9 +10,11 @@ WORKDIR /app
 COPY --from=build /app/target/app.jar app.jar
 
 # Expose the correct port
+ENV address=0.0.0.0
 ENV PORT=8081
 EXPOSE 8081
 
 # Run the Spring Boot JAR directly
-CMD ["sh", "-c", "java -jar app.jar --server.address=0.0.0.0 --server.port=${PORT}"]
+CMD ["sh", "-c", "echo 'Starting application on port, ${address}:${PORT}'; java -jar app.jar --server.address=0.0.0.0 --server.port=${PORT}"]
+
 
