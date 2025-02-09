@@ -32,6 +32,10 @@ public class StripeService {
 		this.bookingDAO = bookingDAO; // ✅ Initialize via constructor
 	}
 
+	public void initialize() {
+		Stripe.apiKey = secretKey;
+	}
+
 	/** ✅ Validate business credentials using Key (username) & Secret (password) */
 	public boolean validateBusiness(String key, String secret) {
 		return userDAO.validateBusiness(key, secret);
@@ -69,9 +73,12 @@ public class StripeService {
 			// ✅ Create a SINGLE Stripe Checkout Session for all items
 			SessionCreateParams params = SessionCreateParams.builder().setMode(SessionCreateParams.Mode.PAYMENT)
 					.setSuccessUrl("https://jad-wapi-wapi-ca2.onrender.com/wapi-wapi/success")
-					.setCancelUrl("https://jad-wapi-wapi-ca2.onrender.com/wapi-wapi/cancel").addAllLineItem(lineItems) // ✅ Add all items
-																										// to a single
-																										// session
+					.setCancelUrl("https://jad-wapi-wapi-ca2.onrender.com/wapi-wapi/cancel").addAllLineItem(lineItems) // ✅
+																														// Add
+																														// all
+																														// items
+					// to a single
+					// session
 					.build();
 
 			Session session = Session.create(params);
