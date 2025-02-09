@@ -20,8 +20,13 @@ public class UserDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	public boolean validateBusiness(String key, String secret) {
-		String hashedSecret = passwordUtils.hashPassword(secret);
+	public boolean validateBusiness(String key, String secret, boolean thirdParty) {
+		String hashedSecret;
+		if (thirdParty) {
+			hashedSecret = passwordUtils.hashPassword(secret);
+		} else {
+			hashedSecret = secret;
+		}
 		String sql = "SELECT user_id, status_id, role_id FROM users WHERE LOWER(username) = LOWER(?) AND password = ? LIMIT 1";
 
 		try {
