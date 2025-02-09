@@ -150,4 +150,17 @@ public class BookingDAO {
             throw new IllegalArgumentException("Error processing selection: " + e.getMessage());
         }
     }
+	
+	public int getBookingStatus(Long bookingId) {
+        String sql = "SELECT status_id FROM booking WHERE booking_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, bookingId);
+    }
+
+    public void updateStatus(Long bookingId, int newStatus) {
+        String sql = "UPDATE booking SET status_id = ? WHERE booking_id = ?";
+        int rowsAffected = jdbcTemplate.update(sql, newStatus, bookingId);
+        if (rowsAffected == 0) {
+            throw new IllegalStateException("Booking not found with id: " + bookingId);
+        }
+    }
 }

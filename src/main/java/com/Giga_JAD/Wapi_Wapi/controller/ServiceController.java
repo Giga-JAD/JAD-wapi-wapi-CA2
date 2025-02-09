@@ -44,11 +44,12 @@ public class ServiceController {
 	@GetMapping("/services")
 	public ResponseEntity<?> getAllServices(
 			@RequestHeader("X-Username") String username,
-			@RequestHeader("X-Secret") String secret) {
+			@RequestHeader("X-Secret") String secret,
+			@RequestHeader("X-third-party") boolean thirdParty) {
 		
 		// ✅ Validate business credentials
 		try {
-			if(!userDAO.validateBusiness(username, secret)) {
+			if(!userDAO.validateBusiness(username, secret, thirdParty)) {
 				return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
 			}
 		} catch (Exception e) {
@@ -71,10 +72,11 @@ public class ServiceController {
     public ResponseEntity<?> getAvailableBookings(
             @PathVariable int serviceId,
             @RequestHeader("X-Username") String username,
-            @RequestHeader("X-Secret") String secret) {
+            @RequestHeader("X-Secret") String secret,
+            @RequestHeader("X-third-party") boolean thirdParty) {
 
         try {
-            if (!userDAO.validateBusiness(username, secret)) {
+            if (!userDAO.validateBusiness(username, secret, thirdParty)) {
                 return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
             }
             
@@ -93,10 +95,11 @@ public class ServiceController {
     public ResponseEntity<?> selectServiceTimeSlot(
             @RequestBody ServiceProviderSelectionRequest request,
             @RequestHeader("X-Username") String username,
-            @RequestHeader("X-Secret") String secret) {
+            @RequestHeader("X-Secret") String secret,
+            @RequestHeader("X-third-party") boolean thirdParty) {
         
         try {
-            if (!userDAO.validateBusiness(username, secret)) {
+            if (!userDAO.validateBusiness(username, secret, thirdParty)) {
                 return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
             }
             
