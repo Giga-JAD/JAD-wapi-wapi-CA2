@@ -9,14 +9,14 @@ FROM tomcat:10-jdk17
 WORKDIR /usr/local/tomcat/webapps/
 COPY --from=build /app/target/app.war ROOT.war
 
-# Set environment variables correctly
+# Set the correct port for both Tomcat and Spring Boot
 ENV PORT=8081
 ENV CATALINA_OPTS="-Dserver.port=${PORT} -DPORT=${PORT}"
 
-# Update Tomcat's server.xml to listen on all interfaces
-RUN sed -i 's/Connector port="8080"/Connector port="'$PORT'" address="0.0.0.0"/g' /usr/local/tomcat/conf/server.xml
+# Update Tomcat's server.xml to bind to 0.0.0.0 and use the correct port
+RUN sed -i 's/Connector port="8081"/Connector port="'$PORT'" address="0.0.0.0"/g' /usr/local/tomcat/conf/server.xml
 
-# Expose the correct port
+# Explicitly expose the port
 EXPOSE 8081
 
 # Start Tomcat
