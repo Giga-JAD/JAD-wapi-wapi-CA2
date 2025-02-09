@@ -10,7 +10,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class WapiWapiApplication {
 
 	public static void main(String[] args) {
-		Dotenv dotenv = Dotenv.load();
+		Dotenv dotenv = EnvConfig.getDotenv();
 
 		System.setProperty("stripe.secretKey", dotenv.get("stripe_secretKey"));
 		System.setProperty("stripe.webhookSecret", dotenv.get("stripe_webhookSecret"));
