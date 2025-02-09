@@ -12,10 +12,14 @@ public class EnvConfig {
 
 	@Bean
 	public Dotenv dotenv() {
-		return dotenv;
+		return getDotenv();
 	}
 
 	public static String get(String key) {
-		return dotenv.get(key);
+		return getDotenv().get(key);
+	}
+
+	public static Dotenv getDotenv() {
+		return dotenv;
 	}
 }
