@@ -68,8 +68,8 @@ public class StripeService {
 		try {
 			// ✅ Create a SINGLE Stripe Checkout Session for all items
 			SessionCreateParams params = SessionCreateParams.builder().setMode(SessionCreateParams.Mode.PAYMENT)
-					.setSuccessUrl("http://localhost:8080/wapi-wapi/success")
-					.setCancelUrl("http://localhost:8080/wapi-wapi/cancel").addAllLineItem(lineItems) // ✅ Add all items
+					.setSuccessUrl("https://jad-wapi-wapi-ca2.onrender.com/wapi-wapi/success")
+					.setCancelUrl("https://jad-wapi-wapi-ca2.onrender.com/wapi-wapi/cancel").addAllLineItem(lineItems) // ✅ Add all items
 																										// to a single
 																										// session
 					.build();
