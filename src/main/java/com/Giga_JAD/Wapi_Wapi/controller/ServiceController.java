@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.Giga_JAD.Wapi_Wapi.dto.AvailableBookingResponse;
+import com.Giga_JAD.Wapi_Wapi.dto.ServiceProviderSelectionRequest;
 import com.Giga_JAD.Wapi_Wapi.dto.ServiceRequest;
 import com.Giga_JAD.Wapi_Wapi.model.dao.BookingDAO;
 import com.Giga_JAD.Wapi_Wapi.model.dao.UserDAO;
@@ -86,6 +88,37 @@ public class ServiceController {
             return ResponseEntity.status(500).body(Map.of("error", "Internal server error"));
         }
     }
+	
+	@PutMapping("/book")
+    public ResponseEntity<?> selectServiceTimeSlot(
+            @RequestBody ServiceProviderSelectionRequest request,
+            @RequestHeader("X-Username") String username,
+            @RequestHeader("X-Secret") String secret) {
+        
+        try {
+            if (!userDAO.validateBusiness(username, secret)) {
+                return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
+            }
+            
+            boolean success = BookingDAO.selectServiceTimeSlot(
+                request.getServiceTimeSlotId(), 
+                username
+            );
+            
+            if (success) {
+                return ResponseEntity.ok(Map.of("message", "Service time slot successfully selected"));
+            } else {
+                return ResponseEntity.status(400).body(Map.of("error", "Time slot is no longer available"));
+            }
+            
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).body(Map.of("error", e.getMessage()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", "Internal server error"));
+        }
+    }
+	
 
 }
 

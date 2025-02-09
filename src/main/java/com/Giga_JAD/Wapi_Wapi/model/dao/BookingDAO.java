@@ -5,6 +5,7 @@ import com.Giga_JAD.Wapi_Wapi.dto.AvailableBookingResponse;
 import com.Giga_JAD.Wapi_Wapi.dto.TimeSlotRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -120,4 +121,33 @@ public class BookingDAO {
             serviceId, today, twoWeeksFromNow);
     }
 
+	public boolean selectServiceTimeSlot(int serviceTimeSlotId, String username) {
+        // First get the user_id for the service provider
+        String getUserIdSql = "SELECT user_id FROM users WHERE LOWER(username) = LOWER(?)";
+        
+        try {
+            Integer userId = jdbcTemplate.queryForObject(getUserIdSql, Integer.class, username);
+            
+            if (userId == null) {
+                throw new IllegalArgumentException("Service provider not found");
+            }
+
+            // Update the service_timeslot table
+            String updateSql = """
+                UPDATE SERVICE_TIMESLOT 
+                SET taken_by_user_id = ? 
+                WHERE service_timeslot_id = ? 
+                AND taken_by_user_id IS NULL
+                """;
+
+            int rowsAffected = jdbcTemplate.update(updateSql, userId, serviceTimeSlotId);
+            
+            return rowsAffected > 0;
+            
+        } catch (EmptyResultDataAccessException e) {
+            throw new IllegalArgumentException("Service provider not found");
+        } catch (DataAccessException e) {
+            throw new IllegalArgumentException("Error processing selection: " + e.getMessage());
+        }
+    }
 }
