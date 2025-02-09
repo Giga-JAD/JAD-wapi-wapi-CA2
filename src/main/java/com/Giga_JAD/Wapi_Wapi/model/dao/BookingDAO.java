@@ -29,4 +29,21 @@ public class BookingDAO {
 			throw new IllegalArgumentException("No service found for bookingId: " + bookingId);
 		}
 	}
+
+    public boolean updateBookingStatus(int bookingId, int newStatusId) {
+        String sql = "UPDATE booking SET status_id = ? WHERE booking_id = ?";
+        int rowsAffected = jdbcTemplate.update(sql, newStatusId, bookingId);
+        return rowsAffected > 0;
+    }
+
+    public int getCurrentStatus(int bookingId) {
+        String sql = "SELECT status_id FROM booking WHERE booking_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, bookingId);
+    }
+
+    public boolean isWorkerAssignedToBooking(int workerId, int bookingId) {
+        String sql = "SELECT COUNT(*) FROM booking WHERE booking_id = ? AND worker_id = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, bookingId, workerId);
+        return count > 0;
+    }
 }
