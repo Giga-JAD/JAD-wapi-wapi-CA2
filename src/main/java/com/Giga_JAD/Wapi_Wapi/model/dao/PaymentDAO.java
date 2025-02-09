@@ -38,10 +38,11 @@ public class PaymentDAO {
 	}
 
 	// ✅ READ - Get payment by ID
-	public Payment getPaymentById(String payment_id) {
-		String sql = "SELECT * FROM payment WHERE payment_id = ?";
+	public Payment getPaymentByBookingId(String booking_id) {
+		int bookingId = Integer.parseInt(booking_id);
+		String sql = "SELECT * FROM payment WHERE booking_id = ?";
 
-		List<Payment> payments = jdbcTemplate.query(sql, paymentRowMapper, payment_id);
+		List<Payment> payments = jdbcTemplate.query(sql, paymentRowMapper, bookingId);
 
 		return payments.stream().findFirst().orElse(null); // ✅ Return first result or null if no match found
 	}
