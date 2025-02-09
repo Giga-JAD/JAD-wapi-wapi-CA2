@@ -1,65 +1,57 @@
 package com.Giga_JAD.Wapi_Wapi.controller;
 
-import jakarta.servlet.ServletException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
 
 import com.Giga_JAD.Wapi_Wapi.model.blueprint.User;
 import com.Giga_JAD.Wapi_Wapi.model.dao.UserDAO;
 import com.Giga_JAD.Wapi_Wapi.utils.passwordUtils;
 
-public class AuthController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
 
-    public AuthController() {
-        super();
-    }
+	private final UserDAO userDAO;
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+	@Autowired
+	public AuthController(UserDAO userDAO) {
+		this.userDAO = userDAO;
+	}
 
-        // Hash the password
-        String hashedPassword = passwordUtils.hashPassword(password);
+	@PostMapping("/login")
+	public String login(@RequestParam String username, @RequestParam String password, HttpServletResponse response,
+			HttpSession session) {
 
-        // Validate the user using UserDAO
-        UserDAO userDAO = new UserDAO();
-        User validatedUser = userDAO.validateUser(username, hashedPassword);
+		// Hash the password before validating
+		String hashedPassword = passwordUtils.hashPassword(password);
 
-        if (validatedUser != null) {
-            if (validatedUser.isIsBlocked()) {
-                // Handle blocked user
-                request.setAttribute("error", "Your account is blocked. Please contact support.");
-                request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
-            } else {
-                // Set a lightweight cookie for session validation
-                Cookie isLoggedInCookie = new Cookie("isLoggedIn", "true");
-                isLoggedInCookie.setPath("/"); // Cookie is valid for the entire domain
-                isLoggedInCookie.setHttpOnly(true); // Prevent JavaScript access
-                isLoggedInCookie.setSecure(false); // Ensure it's sent only over HTTPS
-                isLoggedInCookie.setMaxAge(60 * 60); // Cookie expiry: 1 hour
+		// Validate user credentials
+		User validatedUser = userDAO.validateUser(username, hashedPassword);
 
-                response.addCookie(isLoggedInCookie);
+		if (validatedUser != null) {
+			if (validatedUser.isBlocked()) { // Fix method name
+				return "Your account is blocked. Please contact support.";
+			} else {
+				// Create a secure cookie for authentication
+				Cookie isLoggedInCookie = new Cookie("isLoggedIn", "true");
+				isLoggedInCookie.setPath("/");
+				isLoggedInCookie.setHttpOnly(true);
+				isLoggedInCookie.setSecure(true); // Set to true for HTTPS
+				isLoggedInCookie.setMaxAge(60 * 60); // 1 hour
 
-                // Use session attributes for sensitive user data
-                HttpSession session = request.getSession();
-                session.setAttribute("currentUser", validatedUser);
+				response.addCookie(isLoggedInCookie);
 
-                // Redirect to homePage
-                response.sendRedirect(request.getContextPath() + "/pages/homePage.jsp");
-            }
-        } else {
-            // Handle invalid login
-            request.setAttribute("error", "Invalid username or password.");
-            request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
-        }
-    }
+				// Store user in session
+				session.setAttribute("currentUser", validatedUser);
+
+				return "Login successful! Redirecting...";
+			}
+		} else {
+			return "Invalid username or password.";
+		}
+	}
 }
-
