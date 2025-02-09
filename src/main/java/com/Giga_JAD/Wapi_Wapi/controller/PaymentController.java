@@ -52,9 +52,9 @@ public class PaymentController {
 	}
 
 	/** ✅ Fetch Payment Details */
-	@GetMapping("/{paymentId}")
+	@GetMapping("/{bookingId}")
 	public ResponseEntity<Map<String, Object>> getPaymentDetails(@RequestHeader("X-Username") String Key,
-			@RequestHeader("X-Secret") String Secret, @PathVariable String paymentId) {
+			@RequestHeader("X-Secret") String Secret, @PathVariable String bookingId) {
 
 		// ✅ Validate Credentials
 		try {
@@ -67,17 +67,20 @@ public class PaymentController {
 		}
 
 		try {
-			stripeService.initialize();
-			// 🟢 Retrieve Stripe session details
+			stripeService.initialize(); // Ensure Stripe API key is set
+
+			// 🟢 Retrieve payment details using bookingId
+			Payment payment = paymentDAO.getPaymentByBookingId(bookingId); // Fetch from DB
+			if (payment == null) {
+				return ResponseEntity.status(404).body(Map.of("error", "Payment not found for this booking"));
+			}
+
+			String paymentId = payment.getPaymentId(); // Retrieve associated paymentId
+
+			// 🟢 Retrieve Stripe session details using the paymentId
 			Session session = Session.retrieve(paymentId);
 			Map<String, Object> stripeDetails = objectMapper.readValue(session.toJson(), new TypeReference<>() {
 			});
-
-			// 🟢 Retrieve additional payment details from DB
-			Payment payment = paymentDAO.getPaymentById(paymentId); // Assuming you have this method
-			if (payment == null) {
-				return ResponseEntity.status(404).body(Map.of("error", "Payment not found"));
-			}
 
 			// 🟢 Merge Stripe and DB payment details
 			Map<String, Object> response = new HashMap<>(stripeDetails);
