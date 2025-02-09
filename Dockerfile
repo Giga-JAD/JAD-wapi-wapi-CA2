@@ -13,8 +13,8 @@ COPY --from=build /app/target/app.war ROOT.war
 ENV PORT=8081
 ENV CATALINA_OPTS="-Dserver.port=${PORT} -DPORT=${PORT}"
 
-# Force Tomcat to use PORT from environment
-RUN sed -i 's/Connector port="8080"/Connector port="'$PORT'"/g' /usr/local/tomcat/conf/server.xml
+# Update Tomcat's server.xml to listen on all interfaces
+RUN sed -i 's/Connector port="8080"/Connector port="'$PORT'" address="0.0.0.0"/g' /usr/local/tomcat/conf/server.xml
 
 # Expose the correct port
 EXPOSE 8081
