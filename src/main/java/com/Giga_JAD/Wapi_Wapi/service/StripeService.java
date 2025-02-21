@@ -37,8 +37,8 @@ public class StripeService {
 	}
 
 	/** ✅ Validate business credentials using Key (username) & Secret (password) */
-	public boolean validateBusiness(String key, String secret) {
-		return userDAO.validateBusiness(key, secret);
+	public boolean validateBusiness(String key, String secret, boolean thirdParty) {
+		return userDAO.validateBusiness(key, secret, thirdParty);
 	}
 
 	/** ✅ Create a Stripe Checkout Session and Save Payment */
@@ -60,7 +60,7 @@ public class StripeService {
 
 			SessionCreateParams.LineItem.PriceData priceData = SessionCreateParams.LineItem.PriceData.builder()
 					.setCurrency(product.getCurrency() == null ? "SGD" : product.getCurrency())
-					.setUnitAmount(product.getAmount()).setProductData(productData).build();
+					.setUnitAmount(product.getAmount() * 100).setProductData(productData).build();
 
 			SessionCreateParams.LineItem lineItem = SessionCreateParams.LineItem.builder()
 					.setQuantity((long) product.getQuantity()) // ✅ Convert long to int
